@@ -1,4 +1,4 @@
-# State of the Way Engineers on market Russia
+# State of the Engineers' path to the Russian market
 Первое в РФ исследование пути найма инженера (DevOps, Ops, Cloud, SRE и т.д.) на рынке
 
 В данном репозитории описан список вопросов для CustDev, которые могут быть использованы, как в рамках одной организации, так и применимы для отдельной взятой отрасли.
@@ -42,7 +42,7 @@ https://devoops.ru/talks/20011116-the-devops-engineer-s-social-contract/
 
 ЗЫ: вы так же можете предлогать свои вопросы или разделение их на блоки.
 
-![State of the Way Engineers on market Russia](stateofthewayengineeronmarket.png)
+![State of the Engineers' path to the Russian market](stateoftheengineerspathtotherussianmarket.jpg)
 
 Более подробно о механике исследования и его результатах - позднее.
 
