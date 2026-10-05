@@ -1,26 +1,32 @@
 .DEFAULT_GOAL := help
-BASE ?= /devops-social-contract/
 
-node_modules: package.json
-	npm install
+node_modules: package.json package-lock.json
+	npm ci
 	@touch node_modules
 
+.PHONY: install
+install: node_modules 
+
 .PHONY: dev
-dev: node_modules ## Запустить dev-сервер
-	npx slidev --open
+dev: node_modules ## Run the Slidev dev server
+	npm run dev
 
 .PHONY: build
-build: node_modules ## Собрать статический сайт в dist/ (BASE=/имя-репозитория/)
-	npx slidev build --base $(BASE)
+build: node_modules ## Build the static site into dist/
+	npm run build
+
+THEME ?= light
 
 .PHONY: export
-export: node_modules ## Собрать PDF со всеми шагами анимации
-	npx slidev export --with-clicks --output slides-export.pdf
+export: node_modules ## Export the slides to PDF (THEME=dark for dark mode)
+	npm run export -- $(if $(filter dark,$(THEME)),--dark --output slides-export-dark.pdf)
 
 .PHONY: clean
-clean: ## Удалить dist/ и кеш
-	rm -rf dist .slidev
+clean: ## Remove node_modules and build artifacts
+	rm -rf node_modules dist
 
 .PHONY: help
-help: ## Показать цели
-	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-10s %s\n", $$1, $$2}'
+help: ## Show this help
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+		| sort \
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
