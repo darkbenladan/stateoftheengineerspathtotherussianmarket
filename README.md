@@ -22,9 +22,18 @@ https://devoops.ru/talks/20011116-the-devops-engineer-s-social-contract/
 
 1. Создайте репозиторий и залейте в ветку `main` содержимое этой папки.
 2. В настройках репозитория: Settings → Pages → Source → **GitHub Actions**.
-3. Workflow `.github/workflows/build.yaml` на каждый push в `main` собирает дек и выкладывает его. Имя репозитория подставляется в `--base` само, переименовывать ничего не нужно.
+3. Дальше всё делают пайплайны из `.github/workflows/`.
 
 Слайды откроются по адресу `https://<user>.github.io/<repo>/`.
+
+## CI/CD
+
+- `ci.yaml` — на каждый pull request и push в любую ветку, кроме `main`: ставит зависимости, проверяет, что все кадры из `pages/` есть в `public/slides/`, собирает дек и прикладывает `dist` артефактом на 7 дней.
+- `deploy.yaml` — на push в `main` и вручную: собирает дек и выкладывает на GitHub Pages. Базовый путь берётся из настроек Pages, поэтому работает и с `user.github.io/repo/`, и со своим доменом.
+- `export-pdf.yaml` — вручную или по тегу `v*`: собирает PDF со всеми шагами анимации. По тегу PDF прикладывается к релизу.
+- `dependabot.yml` — раз в неделю обновляет npm-зависимости и версии actions.
+
+Пока в репозитории нет `package-lock.json`, пайплайны ставят зависимости через `npm install`; как только lock-файл закоммичен, они сами переходят на `npm ci`.
 
 ## Структура
 
@@ -95,7 +104,7 @@ make build    # статический сайт в dist/
 make export   # PDF со всеми шагами
 ```
 
-`package-lock.json` в архив не входит: выполните `npm install` один раз и закоммитьте его, после этого в workflow можно заменить `npm install` на `npm ci`.
+`package-lock.json` в архив не входит: выполните `npm install` один раз и закоммитьте его, чтобы сборки были воспроизводимыми.
 
 
 Copyright (c) Krylov Aleksandr.
