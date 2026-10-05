@@ -12,6 +12,7 @@ https://devoops.ru/talks/20011116-the-devops-engineer-s-social-contract/
 
 ![State of the Engineers' path to the Russian market](stateoftheengineerspathtotherussianmarket.jpg)
 
+
 # devops-social-contract
 
 Презентация «Социальный контракт между DevOps-инженером и работодателем» по исследованию «State of the Engineer's Path to the Russian Market». Доклад Александра Крылова, технического директора ИТ Школы Ростелекома.
