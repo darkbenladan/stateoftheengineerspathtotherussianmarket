@@ -1,0 +1,29 @@
+/* Слайд — это кадр 16:9 на весь холст; шаги анимации лежат стопкой поверх первого кадра. */
+:root {
+  --deck-bg: #1b1535;
+}
+
+.slidev-layout.shot-layout {
+  padding: 0;
+  background: var(--deck-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.shot-layout p {
+  margin: 0;
+}
+
+.shot-layout .shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+/* Шаг появляется плавно, как «Выцветание» в PowerPoint. */
+.shot-layout .shot.slidev-vclick-target {
+  transition: opacity 0.25s ease;
+}
