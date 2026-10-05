@@ -1,11 +1,14 @@
 .DEFAULT_GOAL := help
 
+# Install dependencies only when the manifests are newer than node_modules
+# (or node_modules is missing). Plain `make build` twice in a row will NOT
+# reinstall — Make skips this rule when node_modules is already up to date.
 node_modules: package.json package-lock.json
 	npm ci
 	@touch node_modules
 
 .PHONY: install
-install: node_modules 
+install: node_modules ## Install dependencies (only if manifests changed)
 
 .PHONY: dev
 dev: node_modules ## Run the Slidev dev server
@@ -15,6 +18,8 @@ dev: node_modules ## Run the Slidev dev server
 build: node_modules ## Build the static site into dist/
 	npm run build
 
+# THEME=dark exports the dark variant into its own file, so light and dark
+# PDFs don't overwrite each other. Anything else keeps the default light one.
 THEME ?= light
 
 .PHONY: export
