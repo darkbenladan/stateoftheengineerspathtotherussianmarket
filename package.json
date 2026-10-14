@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@iconify-json/simple-icons": "^1.2.99",
-    "playwright-chromium": "^1.63.0"
+    "playwright-chromium": "^1.64.0"
   },
   "overrides": {
     "dompurify": "^3.4.16",
